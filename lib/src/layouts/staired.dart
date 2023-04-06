@@ -128,7 +128,7 @@ class SliverStairedGridDelegate
       }
 
       mainAxisOffset = targetMainAxisOffset + mainAxisSpacing;
-      if (startFromSameCrossAxisDirection) {
+      if (!startFromSameCrossAxisDirection) {
         reversed = !reversed;
       }
       crossAxisOffset =
