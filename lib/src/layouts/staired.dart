@@ -42,6 +42,7 @@ class SliverStairedGridDelegate
     double crossAxisSpacing = 0,
     this.tileBottomSpace = 0,
     this.startCrossAxisDirectionReversed = false,
+    this.startFromSameCrossAxisDirection = false,
   })  : assert(tileBottomSpace >= 0),
         super.count(
           pattern: pattern,
@@ -58,6 +59,10 @@ class SliverStairedGridDelegate
   /// Indicates whether we should start to place the tile in the reverse cross
   /// axis direction.
   final bool startCrossAxisDirectionReversed;
+
+  /// Indicates whether we should start to place the next tile not in the reverse
+  /// of start cross axis direction
+  final bool startFromSameCrossAxisDirection;
 
   @override
   SliverPatternGridGeometries getGeometries(
@@ -123,7 +128,9 @@ class SliverStairedGridDelegate
       }
 
       mainAxisOffset = targetMainAxisOffset + mainAxisSpacing;
-      reversed = !reversed;
+      if (startFromSameCrossAxisDirection) {
+        reversed = !reversed;
+      }
       crossAxisOffset =
           reversed ? maxCrossAxisExtent - crossAxisSpacing : crossAxisSpacing;
     }
